@@ -14,10 +14,14 @@ It is a template engine, which support configurable flags and handlers. Here is 
 </script>
 
 Further 
-=======
+===========
 
 It support following tags:
+
 	if, expr, lo, while, debug, alias
+	
 and you can add your own handler, by:
+
 	tpl.add_handler({flag:"yourflag", oncreate:function(){}, onrender:function(){}});
+	
 for more detail, please refer to the source code
