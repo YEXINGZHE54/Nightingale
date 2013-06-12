@@ -1,0 +1,51 @@
+<html>
+<head>
+<style>
+	textarea{
+		min-width: 600px;
+		min-height:200px;
+	}
+</style>
+<script src="template.js"></script>
+</head>
+<body>
+	<div style = "border-bottom-style:dotted;">
+		<div style="float:left;width:600px">
+		<textarea id = 'tpl'>
+		这里放模板, 例如  <br />
+		{lo strs => str} 
+			str = {str}， str1 = {str1}(还未重命名), <br>
+			变量重命名后，{alias str1 = str} str1 = {str1} <br />
+		{} 
+		在循环外部， str = {str} <br />
+		这是一个计算器： 1 + (2*3-4)*5/2 = {expr 1 + (2*3-4)*5/2}
+		</textarea>
+		<br />
+		<label> 模板的使用注意：<br />
+		1.一切模板表达式都应被包裹在{}之间，否则..。<br />
+		2.输出变量值，直接在{}间放入变量名即可。<br />
+		4.支持自定义语法和相应的处理，读源代码。<br />循环lo, 重命名alias，条件判断if，调试debug, 计算器expr 等 <br />
+		</div>
+		<div style="float:right">
+		<textarea id = 'data'>str = 'this is a string';strs = ['1','2','3'];</textarea> <br />
+		<label>这里放数据(js)</label>
+		<input type='button' onclick = 'go()' value = "GoGoGo!" />
+		</div>
+		<div style="clear:both"></div>		
+	</div>
+	<div id = 'result' style="margin-top:10px;"></div>
+<script>
+	var tpl_d = document.getElementById('tpl');
+	var data_d = document.getElementById('data');
+	var result_d = document.getElementById('result');
+	function go(){
+		var tpl = new Template(tpl_d.value);
+		var data_str = data_d.value;
+		eval(data_str);
+		tpl.compile();
+		var result = tpl.render();
+		result_d.innerHTML = result;
+	}
+</script>
+</body>
+</html>
